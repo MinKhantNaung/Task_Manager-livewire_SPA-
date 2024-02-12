@@ -15,6 +15,13 @@ class Tasks extends Component
         $this->tasks = ['First Task', 'Second Task'];
     }
 
+    public function add()
+    {
+        $this->tasks[] = $this->task;
+
+        $this->reset('task');
+    }
+
     public function render()
     {
         return view('livewire.tasks');

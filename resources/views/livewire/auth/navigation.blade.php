@@ -1,4 +1,4 @@
-<div class="sm:fixed sm:top-0 sm:right-0 p-6 text-end z-10">
+<div class="sm:fixed sm:top-0 sm:right-0 xs:fixed xs:top-0 xs:right-0 p-6 text-end z-10">
     @auth
         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500" wire:navigate>Dashboard</a>
     @else
