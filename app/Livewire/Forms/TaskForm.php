@@ -37,5 +37,7 @@ class TaskForm extends Form
             'priority' => $this->priority,
             'deadline' => $this->deadline
         ]);
+
+        session()->flash('success', 'Task created successfully !');
     }
 }
