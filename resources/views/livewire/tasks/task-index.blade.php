@@ -1,27 +1,41 @@
 <div>
-    <div class="grid grid-cols-12">
+    <div class="grid grid-cols-12 gap-4">
         {{-- grid col logic like bootstrap// -> col-span-6 means col-6 in bootstrap / col-start-4 means offset-3 in
         bootstrap --}}
-        <div class="col-span-12 md:col-span-6 md:col-start-4 lg:col-span-4 lg:col-start-5 my-2">
+
+        {{-- tasks section --}}
+        <div class="col-span-12 md:col-span-6 lg:col-span-4 lg:col-start-3 my-2">
+            @foreach ($tasks as $task)
+                <div wire:key='{{ $task->id }}' class="rounded-md mb-5">
+                    <h1 class="bg-white text-black pl-2 py-2 border-b border-b-black">
+                        {{ $task->title }}
+                        <p class="text-sm">{{ $task->deadline }}</p>
+                    </h1>
+                    <div class="bg-white text-black pl-2 py-2">
+                        {{ $task->description }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <div class="col-span-12 md:col-span-6 lg:col-span-4 my-2">
             <h1 class="font-extrabold text-lg">Tasks</h1>
 
             @if (session('success'))
-                <div id="alert-3"
-                    class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-                    role="alert">
-                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 20 20">
+                <div id="alert-5" class="flex items-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800" role="alert">
+                    <svg class="flex-shrink-0 w-4 h-4 dark:text-gray-300" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
                     <span class="sr-only">Info</span>
-                    <div class="ms-3 text-sm font-medium">
+                    <div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300">
                         {{ session('success') }}
                     </div>
-                    <button type="button"
-                        class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
-                        data-dismiss-target="#alert-3" aria-label="Close">
-                        <span class="sr-only">Close</span>
+                    <button wire:click.prevent="clearSession" type="button"
+                        class="ms-auto -mx-1.5 -my-1.5 bg-gray-50 text-gray-500 rounded-lg focus:ring-2 focus:ring-gray-400 p-1.5 hover:bg-gray-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                        data-dismiss-target="#alert-5" aria-label="Close">
+                        <span class="sr-only">Dismiss</span>
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -34,7 +48,7 @@
             <form wire:submit.prevent='saveTask' method="POST">
                 <div class="mb-3">
                     <label for="title">Title</label> <br>
-                    <input wire:model.live='form.title' type="text"
+                    <input wire:model.blur='form.title' type="text"
                         class="rounded-md w-[100%] @error('form.title') border-rose-700 focus:ring-rose-800 focus:border-rose-600 @endif"
                         id="title">
                     @error('form.title')

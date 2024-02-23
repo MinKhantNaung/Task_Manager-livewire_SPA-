@@ -3,6 +3,7 @@
 namespace App\Livewire\Tasks;
 
 use App\Livewire\Forms\TaskForm;
+use App\Livewire\LivewireHelper;
 use Livewire\Component;
 
 class TaskIndex extends Component
@@ -16,9 +17,16 @@ class TaskIndex extends Component
         $this->form->reset();
     }
 
+    public function clearSession()
+    {
+        (new LivewireHelper)->clearSession();
+    }
+
     public function render()
     {
-        return view('livewire.tasks.task-index')
+        return view('livewire.tasks.task-index', [
+            'tasks' => auth()->user()->tasks()->orderBy('id', 'desc')->get()
+        ])
             ->layout('layouts.app');
     }
 }
