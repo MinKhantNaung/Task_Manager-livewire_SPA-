@@ -24,9 +24,7 @@ class TaskIndex extends Component
 
     public function render()
     {
-        return view('livewire.tasks.task-index', [
-            'tasks' => auth()->user()->tasks()->orderBy('id', 'desc')->get()
-        ])
+        return view('livewire.tasks.task-index')
             ->layout('layouts.app');
     }
 }

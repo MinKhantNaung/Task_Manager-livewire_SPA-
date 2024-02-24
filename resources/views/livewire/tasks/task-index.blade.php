@@ -3,22 +3,7 @@
         {{-- grid col logic like bootstrap// -> col-span-6 means col-6 in bootstrap / col-start-4 means offset-3 in
         bootstrap --}}
 
-        {{-- tasks section --}}
-        <div class="col-span-12 md:col-span-6 lg:col-span-4 lg:col-start-3 my-2">
-            @foreach ($tasks as $task)
-                <div wire:key='{{ $task->id }}' class="rounded-md mb-5">
-                    <h1 class="bg-white text-black pl-2 py-2 border-b border-b-black">
-                        {{ $task->title }}
-                        <p class="text-sm">{{ $task->deadline }}</p>
-                    </h1>
-                    <div class="bg-white text-black pl-2 py-2">
-                        {{ $task->description }}
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <div class="col-span-12 md:col-span-6 lg:col-span-4 my-2">
+        <div class="col-span-12 md:col-span-6 md:col-start-4 lg:col-span-4 lg:col-start-5 my-2">
             <h1 class="font-extrabold text-lg">Tasks</h1>
 
             @if (session('success'))
