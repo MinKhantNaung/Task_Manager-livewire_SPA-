@@ -10,11 +10,15 @@
                         {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }} /
                         {{ \Carbon\Carbon::parse($task->deadline)->diffForHumans() }}</div>
                 </div>
-                <div class="text-wrap">
+                <div class="text-wrap break-all">
                     {{ $task->description }}
                 </div>
             </div>
         </a>
     @endforeach
+
+    <div class="max-w-[100%]">
+        {{ $tasks->links(data: ['scrollTo' => false]) }}
+    </div>
 
 </div>

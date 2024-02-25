@@ -2,22 +2,17 @@
 
 namespace App\Livewire\Tasks;
 
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class TasksList extends Component
 {
-    public $tasks;
-
-    public function mount($tasks)
-    {
-        $this->tasks = $tasks;
-    }
+    use WithPagination;
 
     public function render()
     {
         return view('livewire.tasks.tasks-list', [
-            'tasks' => $this->tasks
+            'tasks' => auth()->user()->tasks()->orderBy('id', 'desc')->paginate(5)
         ]);
     }
 }
