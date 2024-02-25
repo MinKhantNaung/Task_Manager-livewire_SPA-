@@ -10,9 +10,9 @@
                         {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }} /
                         {{ \Carbon\Carbon::parse($task->deadline)->diffForHumans() }}</div>
                 </div>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                <div class="text-wrap">
                     {{ $task->description }}
-                </p>
+                </div>
             </div>
         </a>
     @endforeach
