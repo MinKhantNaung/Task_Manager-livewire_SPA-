@@ -10,8 +10,6 @@ class Tasks extends Component
     {
         $tasks = auth()->user()->tasks()->orderBy('id', 'desc')->get();
 
-        return view('livewire.tasks.tasks', [
-            'tasks' => $tasks
-        ]);
+        return view('livewire.tasks.tasks');
     }
 }
