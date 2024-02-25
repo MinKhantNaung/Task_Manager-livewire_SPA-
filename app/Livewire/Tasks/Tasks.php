@@ -7,13 +7,6 @@ use Livewire\Component;
 
 class Tasks extends Component
 {
-    #[On('task-created')]
-
-    public function test($title)
-    {
-        dd($title);
-    }
-
     public function render()
     {
         $tasks = auth()->user()->tasks()->orderBy('id', 'desc')->get();
