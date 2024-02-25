@@ -14,7 +14,7 @@ class TaskIndex extends Component
     {
         $this->validate();
         $this->form->createTask();
-        $this->dispatch('task-created');
+        $this->dispatch('task-created', ['title' => $this->form->title]); // you can also give like 'title : $this->form->title'
         $this->form->reset();
     }
 

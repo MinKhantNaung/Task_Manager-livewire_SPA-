@@ -9,9 +9,9 @@ class Tasks extends Component
 {
     #[On('task-created')]
 
-    public function test()
+    public function test($title)
     {
-        dd('yes');
+        dd($title);
     }
 
     public function render()
