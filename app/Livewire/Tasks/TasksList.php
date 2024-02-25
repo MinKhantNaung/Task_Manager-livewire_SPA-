@@ -9,6 +9,11 @@ class TasksList extends Component
 {
     use WithPagination;
 
+    public function placeholder()
+    {
+        return view('components.loader');
+    }
+
     public function render()
     {
         return view('livewire.tasks.tasks-list', [
