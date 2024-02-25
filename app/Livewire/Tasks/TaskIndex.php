@@ -15,8 +15,6 @@ class TaskIndex extends Component
         $this->validate();
         $this->form->createTask();
         $this->form->reset();
-
-        return $this->redirectRoute('tasks.index', navigate: true);
     }
 
     public function clearSession()
@@ -26,7 +24,6 @@ class TaskIndex extends Component
 
     public function render()
     {
-        return view('livewire.tasks.task-index')
-            ->layout('layouts.app');
+        return view('livewire.tasks.task-index');
     }
 }
