@@ -1,9 +1,6 @@
-<div class="grid grid-cols-12 gap-5">
+<div>
     {{-- tasks section --}}
-    <div class="col-span-12 lg:col-span-4 lg:col-start-3 my-5 px-2">
-        <livewire:tasks.tasks-list lazy="on-load" />
-    </div>
-    <div class="col-span-12 lg:col-span-4 my-5 px-2">
-        <livewire:tasks.task-index>
-    </div>
+
+    <livewire:tasks.tasks-list lazy="on-load" />
+
 </div>

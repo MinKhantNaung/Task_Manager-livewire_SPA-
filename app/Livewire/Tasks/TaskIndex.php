@@ -14,9 +14,10 @@ class TaskIndex extends Component
     {
         $this->validate();
         $this->form->createTask();
+        $this->dispatch('task-created');
         $this->form->reset();
 
-        return $this->redirectRoute('tasks.index', navigate: true);
+        // return $this->redirectRoute('tasks.index', navigate: true);
     }
 
     public function clearSession()
