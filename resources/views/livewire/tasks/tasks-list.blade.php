@@ -1,6 +1,6 @@
 <div class="grid grid-cols-12 gap-5">
     <div class="col-span-12 lg:col-span-4 lg:col-start-3 my-5 px-2">
-        <livewire:tasks.tasks-count :$count />
+        <livewire:tasks.tasks-count :$tasksByStatus />
 
         @foreach ($tasks as $index => $task)
             <a href="#"
