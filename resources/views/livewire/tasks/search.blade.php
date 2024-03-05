@@ -12,9 +12,11 @@
             placeholder="Start typing..." />
     </div>
 
-    @foreach ($results as $result)
-        <div class="p-2 hover:cursor-pointer">
-            {{ $result->title }}
-        </div>
-    @endforeach
+    <ul>
+        @foreach ($results as $result)
+            <li class="p-2 hover:cursor-pointer">
+                {{ $result->title }}
+            </li>
+        @endforeach
+    </ul>
 </div>
