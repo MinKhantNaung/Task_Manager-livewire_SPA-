@@ -27,21 +27,24 @@ class TasksList extends Component
         ]);
     }
 
-    #[Computed]
-    public function tasks()
+    // (cache: true) for cache all component
+    #[Computed(persist: true)]
+    public function tasksByStatus()
     {
-        return auth()->user()->tasks()->orderBy('id', 'desc')->paginate(4);
+        return auth()->user()->tasks()->select('status', DB::raw('Count(*) as count'))
+            ->groupBy('status')
+            ->orderByRaw("FIELD(status, 'started', 'in_progress', 'done')")
+            ->get();
     }
 
     #[On('task-created')]
 
     public function render()
     {
+        // unset for destory cache
+        unset($this->tasksByStatus);
         return view('livewire.tasks.tasks-list', [
-            'tasksByStatus' => auth()->user()->tasks()->select('status', DB::raw('Count(*) as count'))
-                ->groupBy('status')
-                ->orderByRaw("FIELD(status, 'started', 'in_progress', 'done')")
-                ->get()
+            'tasks' => auth()->user()->tasks()->orderBy('id', 'desc')->paginate(4),
         ]);
     }
 }
