@@ -28,22 +28,35 @@
 
             <label for="photo" class="my-3 bg-violet-200 rounded-md p-3 text-indigo-500">Upload Image</label>
 
-            @if ($photo)
-                <img class="rounded-full w-96 h-96" src="{{ $photo->temporaryUrl() }}" alt="image description">
+            @if ($photos)
+                @foreach ($photos as $photo)
+                    @if (in_array($photo->getClientOriginalExtension(), ['png', 'jpg', 'jpeg', 'svg', 'webp']))
+                        <img class="rounded-full w-96 h-96 mx-auto" src="{{ $photo->temporaryUrl() }}"
+                            alt="image description">
+                    @endif
+                @endforeach
             @endif
 
-            <input wire:model.live='photo' type="file"
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="photo">
-            @error('photo')
-                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-                    role="alert">
-                    <span class="font-medium">{{ $message }}</span>
-                </div>
-            @enderror
-            <button wire:click.prevent='save' class="bg-teal-500 text-white rounded-md p-3">
-                Save
-            </button>
+            <form wire:submit.prevent='save'>
+                <input wire:model='photos' type="file" accept=".png, .jpg, .jpeg, .svg, .webp"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    multiple>
+                @error('photos')
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <span class="font-medium">{{ $message }}</span>
+                    </div>
+                @enderror
+                @error('photos.*')
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                        role="alert">
+                        <span class="font-medium">{{ $message }}</span>
+                    </div>
+                @enderror
+                <button type='submit' class="bg-teal-500 text-white rounded-md p-3">
+                    Save
+                </button>
+            </form>
         </div>
     </div>
 </div>

@@ -12,19 +12,26 @@ class ImageIndex extends Component
 {
     use WithFileUploads;
 
-    #[Validate('required|mimes:png,jpg,jpeg,svg,webp')]
-    public $photo;
+    #[Validate('required')]
+    #[Validate(['photos.*' => 'image|mimes:png,jpg,jpeg,svg,webp'])]
+    public $photos = []; // don't forget to set [] to variable when you upload multiple files.
 
     public function save()
     {
         $this->validate();
-        $image_name = uniqid() . '_' . $this->photo->getClientOriginalName();
-        $path = $this->photo->storeAs('images', $image_name, 'public');
 
-        Image::create([
-            'name' => $image_name,
-            'path' => $path,
-        ]);
+        if (!is_null($this->photos)) {
+            foreach ($this->photos as $photo) {
+                $image_name = uniqid() . '_' . $photo->getClientOriginalName();
+                $path = $photo->storeAs('images', $image_name, 'public');
+
+                Image::create([
+                    'name' => $image_name,
+                    'path' => $path,
+                ]);
+            }
+        }
+
         $this->reset();
 
         session()->flash('success', 'Image uploaded successfully !');
