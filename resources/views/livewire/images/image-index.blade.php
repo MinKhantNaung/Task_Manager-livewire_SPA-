@@ -58,5 +58,17 @@
                 </button>
             </form>
         </div>
+
+        {{-- images --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0">
+            @foreach ($this->images as $image)
+                <div class="text-center">
+                    <img src="{{ asset("storage/$image->path") }}" alt="{{ $image->name }}" class="w-full">
+                    <button wire:click.prevent='download({{ $image }})' type="button" class="mt-1 bg-indigo-500 p-2 text-gray-50 rounded-md">
+                        Download
+                    </button>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>

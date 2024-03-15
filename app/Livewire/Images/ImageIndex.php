@@ -6,6 +6,7 @@ use App\Models\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Livewire\LivewireHelper;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 
 class ImageIndex extends Component
@@ -33,6 +34,7 @@ class ImageIndex extends Component
         }
 
         $this->reset();
+        unset($this->photos);
 
         session()->flash('success', 'Image uploaded successfully !');
     }
@@ -40,6 +42,18 @@ class ImageIndex extends Component
     public function clearSession()
     {
         (new LivewireHelper)->clearSession();
+    }
+
+    #[Computed]
+    public function images()
+    {
+        return Image::orderBy('id', 'desc')
+            ->get();
+    }
+
+    public function download(Image $image)
+    {
+        return response()->download(public_path("storage/$image->path"), 'image.webp');
     }
 
     public function render()
