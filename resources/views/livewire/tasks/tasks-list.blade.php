@@ -48,6 +48,9 @@
                                 class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">DONE</label>
                         </div>
                     </div>
+
+                    {{-- edit button --}}
+                    <button type="button" wire:click.prevent="$dispatch('edit-task', {id: {{ $task->id }}})" class="bg-indigo-600 text-gray-300 float-end p-2 rounded-lg">Edit</button>
                 </div>
             </a>
         @endforeach

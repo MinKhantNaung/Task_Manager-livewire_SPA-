@@ -38,7 +38,6 @@ class TasksList extends Component
     }
 
     #[On('task-created')]
-
     public function render()
     {
         // unset for destory cache

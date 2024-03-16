@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Tasks;
 
+use App\Models\Task;
+use Livewire\Component;
 use App\Livewire\Forms\TaskForm;
 use App\Livewire\LivewireHelper;
-use Livewire\Component;
+use Livewire\Attributes\On;
 
 class TaskIndex extends Component
 {
@@ -18,6 +20,14 @@ class TaskIndex extends Component
         $this->form->reset();
 
         // return $this->redirectRoute('tasks.index', navigate: true);
+    }
+
+    #[On('edit-task')]
+    public function editTask($id)
+    {
+        $task = Task::findOrFail($id);
+
+        $this->form->setTask($task);
     }
 
     public function clearSession()
