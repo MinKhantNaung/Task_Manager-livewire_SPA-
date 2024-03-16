@@ -52,7 +52,7 @@
                     {{-- edit button --}}
                     <button type="button" wire:click.prevent="$dispatch('edit-task', {id: {{ $task->id }}})" class="bg-indigo-600 text-gray-300 p-2 rounded-lg float-end">Edit</button>
                     {{-- delete button  --}}
-                    <button type="button" wire:click.prevent="delete({{ $task }})" class="bg-rose-600 text-gray-300 p-2 rounded-lg float-end">Delete</button>
+                    <button type="button" wire:click.prevent="delete({{ $task }})" wire:confirm='Are you sure to delete this task?' class="bg-rose-600 text-gray-300 p-2 rounded-lg float-end">Delete</button>
                 </div>
             </a>
         @endforeach
