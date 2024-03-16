@@ -46,4 +46,10 @@ class TasksList extends Component
             'tasks' => auth()->user()->tasks()->orderBy('id', 'desc')->paginate(4),
         ]);
     }
+
+    public function delete(Task $task)
+    {
+        $task->delete();
+        unset($this->tasksByStatus);
+    }
 }
